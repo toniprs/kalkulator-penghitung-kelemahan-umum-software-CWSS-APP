@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jspdf</title>
+  <link rel="stylesheet" type="text/css" href="base.css">
+<script type="text/javascript" src="base.js"></script>
+<script type="text/javascript" src="jspdf.min.js"></script>
+<script type="text/javascript" src="html2canvas.js"></script>
+<script type="text/javascript">
+
+function genPDF(){
+  html2canvas(document.getElementById('wrap')).then(function(canvas) {
+                var img = canvas.toDataURL('image/png');
+                var doc = new jsPDF();
+                doc.addImage(img, 'JPEG', 20, 20);
+                doc.text('good job bro');
+                doc.save('test.pdf');
+            })
+}
+
+</script>
+
+
+<div class="content">
+  <header>
+    <img src="cm.png" width="160px" height="150"px align="right">
+    <img src="cm.png" width="160px" height="150"px align="left">
+    <h1 class="judul">CWSS (Common Weakness Scoring System) Application</h1></header>
+    <nav>
+        <ul>
+            <li><a href="index.php?page=home">Home</a></li>
+            <li><a href="deskripsi.html?page=deskripsi">Deskripsi</a>
+                <ul class="sub1">
+                     <li><a href="cwss.php">Pengertian CWSS</a></li>
+                    <li><a href="cwssformula.php">CWSS Formula</a></li>
+                    <li><a href="cwssmetric.php">CWSS Metric</a></li>
+                </ul>
+            </li>
+            <li><a href="assesment.php?page=assesment">Assesment</a></li>
+        </ul>
+    </nav>
+ 
+  <div class="badan" style="background-color:;">
+</head>
+<body>
+   
+
+<div class="container">
+    <div class="main">
+        <form  method="get" action="penilaian.html" id="form">
+      <h2>CWSS APPLICATION</h2><hr/>   </form></div>
+      <table  border="15" width="100%"> <td> <?php include "proses.php";?></table></td>
+      
+      
+
+<fieldset id="baseMetricGroup">
+   
+  <legend id="baseMetricGroup_Legend" title="Menangkap resiko yang berkaitan dengan kelemahan, kepercayaan pada keakuratan temuan dan kekuatan mengontrol">Base Finding Score</legend>
+
+
+<body onload='hideTotal()'>
+    <div  id="wrap">
+        <form action=""  id="base finding" onsubmit="return false;">
+        <div>
+            <h3 id="TI_Heading" title="Dampak teknis yang diakibatkan oleh kelemahan, dengan asumsi bahwa kelemahan tersebut berhasil dieksploitasi">Technical Impact (TI)</h3>
+           <div class="metric">
+               
+                
+                <input name="ti" value="C" id="TI_C" type="radio" onclick="calculateTotal()">
+                 <label for="TI_C" id="TI_C_Label" title="Kontrol penuh atas perangkat lunak yang dianalisis ke titik di mana operasi sedang berlangsung "/> Critical (C)</label>
+
+                <input name="ti" value="H" id="TI_H" type="radio"onclick="calculateTotal()"> <label for="TI_H" id="TI_H_Label" title="Kontrol tinggi atas perangkat lunak yang dianalisis, atau akses ke informasi penting dapat diperoleh."/>High (H)</label>
+                
+                <input name="ti" value="M" id="TI_M" type="radio"onclick="calculateTotal()"><label for="TI_M" id="TI_M_Label" title="Kontrol menengah atas perangkat lunak yang dianalisis, atau akses ke informasi yang cukup penting dapat diperoleh">Medium (M)</label>
+                <input name="ti" value="L" id="TI_L" type="radio"onclick="calculateTotal()"><label for="TI_L" id="TI_L_Label" title=" Kontrol minimal atas perangkat lunak yang dianalisis, atau hanya akses ke informasi yang relatif tidak penting dapat diperoleh">Low (L)</label>
+                <input name="ti" value="N" id="TI_N" type="radio"onclick="calculateTotal()"><label for="TI_N" id="TI_N_Label" title="TTidak ada dampak teknis terhadap perangkat lunak yang dianalisis sama sekali. Dengan kata lain, ini tidak menyebabkan kerentanan.">None (N)</label>
+                <input name="ti" value="D" id="TI_D" type="radio"onclick="calculateTotal()"><label for="TI_D" id="TI_D_Label" title="The Default weight is the median of the weights for Critical, High, Medium, Low, and None">Default (D)</label>
+                <input name="ti" value="UK" id="TI_UK" type="radio"onclick="calculateTotal()"><label for="TI_UK" id="TI_P_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+                <input name="ti" value="NA" id="TI_NA" type="radio"onclick="calculateTotal()"><label for="TI_NA" id="TI_A_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses. This factor might not be applicable in an environment with high assurance requirements; the user might want to investigate every weakness finding of interest, regardless of confidence.">Not Applicable (NA)</label>
+                <input name="ti" value="Q" id="TI_Q" type="radio"onclick="calculateTotal()"><label for="TI_Q" id="TI_Q_Label" title="This factor could be quantified with custom weights.">Quantified (Q)</label>
+  
+                          
+                <br/>
+
+
+
+
+                 <div class="metric">
+      <h3 id="AP_Heading" title="Hak istimewa yang diperoleh penyerang untuk mengeksploitasi kelemahan">Acquired Privilege(AP)</h3>
+      <input name="ap" value="A" id="AP_A" type="radio"onclick="calculateTotal()"><label for="AP_A" id="AP_A_Label" title="Penyerang mendapatkan akses ke entitas dengan administrator, root, sistem, atau hak istimewa setara yang menyiratkan kontrol penuh atas perangkat lunak dalam analisis; atau, penyerang dapat meningkatkan hak mereka sendiri (lebih rendah) untuk administrator.">Administrator (A)</label>
+      <input name="ap" value="P" id="AP_P" type="radio"onclick="calculateTotal()"><label for="AP_P" id="AP_P_Label" title="Penyerang mendapatkan akses ke entitas dengan beberapa hak istimewa, tetapi tidak setara dengan administrator; atau, penyerang dapat meningkatkan hak mereka sendiri (lebih rendah) untuk pengguna yang sebagian-istimewa. Sebagai contoh, pengguna mungkin memiliki hak untuk membuat cadangan, tetapi tidak untuk mengubah konfigurasi perangkat lunak atau menginstal pemutakhiran">Partialy Privileged User (P)</label>
+      <input name="ap" value="RU" id="AP_RU" type="radio"onclick="calculateTotal()"><label for="AP_RU" id="AP_RU_Label" title="Penyerang mendapatkan akses ke entitas yang merupakan pengguna biasa yang tidak memiliki hak istimewa; atau, penyerang dapat meningkatkan hak mereka sendiri (lebih rendah) untuk pengguna biasa.">Reguler User (RU)</label>
+      <input name="ap" value="L" id="AP_L" type="radio"onclick="calculateTotal()"><label for="AP_L" id="AP_L_Label" title="Penyerang mendapatkan akses ke entitas secara terbatas">Limited/Guest (L)</label>
+      <input name="ap" value="N" id="AP_N" type="radio"onclick="calculateTotal()"><label for="AP_N" id="AP_N_Label" title="Penyerang tidak dapat memperoleh akses ke hak tambahan apa pun selain yang telah tersedia untuk penyerang">None (N)</label>
+      <input name="ap" value="D" id="AP_D" type="radio"onclick="calculateTotal()"><label for="AP_D" id="AP_D_Label" title="Median of the weights for None, Guest, Regular User, Partially-Privileged User, and Administrator..">Default (D)</label>
+      <input name="ap" value="UK" id="AP_UK" type="radio"onclick="calculateTotal()"><label for="AP_UK" id="AP_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="ap" value="NA" id="AP_NA" type="radio"onclick="calculateTotal()"><label for="AP_NA" id="AP_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses. This factor might not be applicable in an environment with high assurance requirements that wants strict enforcement of privilege separation, even between already-privileged users.">Not Applicable (NA)</label>
+      <input name="ap" value="Q" id="AP_Q" type="radio"onclick="calculateTotal()"><label for="AP_Q" id="AP_Q_Label" title="This factor could be quantified with custom weights. Note that Quantified values are supported for completeness; however, since privileges and users are discrete entities, there might be limited circumstances in which a quantified model would be useful.">Quantified (Q)</label>
+    </div>
+
+<div class="metric">
+      <h3 id="AL_Heading" title="Lapisan operasional dimana penyerang mendapatkan hak istimewa dengan berhasil mengeksploitasi kelemahan">Acquired Privilege Layer(AL)</h3>
+      <input name="al" value="A" id="AL_A" type="radio"onclick="calculateTotal()"><label for="AL_A" id="AL_A_Label" title="Penyerang memperoleh hak istimewa yang didukung dalam perangkat lunak di bawah analisis itu sendiri. (Jika perangkat lunak dalam analisis adalah bagian penting dari sistem yang mendasari, seperti sistem operasi kernel, maka nilai sistem mungkin lebih tepat.)">Application (A)</label>
+      <input name="al" value="S" id="AL_S" type="radio"onclick="calculateTotal()"><label for="AL_S" id="AL_S_Label" title="Penyerang memperoleh hak istimewa untuk sistem dasar atau host fisik yang digunakan untuk menjalankan perangkat lunak dalam analisis.">System (S)</label>
+      <input name="al" value="N" id="AL_N" type="radio"onclick="calculateTotal()"><label for="AL_N" id="AL_N_Label" title="Penyerang memperoleh hak istimewa untuk mengakses jaringan.">Network (N)</label>
+      <input name="al" value="E" id="AL_E" type="radio"onclick="calculateTotal()"><label for="AL_E" id="AL_E_Label" title="Penyerang memperoleh hak istimewa untuk mengakses infrastruktur perusahaan, seperti router, switch, DNS, pengontrol domain, firewall, server identitas, dll.">Enterprise Infrastructure (E)</label>
+      <input name="al" value="D" id="AL_D" type="radio"onclick="calculateTotal()"><label for="AL_D" id="AL_D_Label" title="Median of the weights for Application, System, Network, and Enterprise Infrastructure.">Default (D)</label>
+      <input name="al" value="UK" id="AL_UK" type="radio"onclick="calculateTotal()"><label for="AL_UK" id="AL_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="al" value="NA" id="AL_NA" type="radio"onclick="calculateTotal()"><label for="AL_NA" id="AL_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.
+This factor might not be applicable in an environment with high assurance requirements that wants strict enforcement of privilege separation, even between already-privileged users.">Not Applicable (NA)</label>
+      <input name="al" value="Q" id="AL_Q" type="radio"onclick="calculateTotal()"><label for="AL_Q" id="AL_Q_Label" title="This factor could be quantified with custom weights. Note that Quantified values are supported for completeness; however, since privilege layers are discrete entities, there might be limited circumstances in which a quantified model would be useful.">Quantified (Q)</label>
+    
+    </div>
+
+    <div class="metric">
+      <h3 id="IC_Heading" title="Kemampuan mengontrol kelemahan agar tidak dapat diekploitasi oleh penyerang">Internal Control Effectiveness(IC)</h3>
+      <input name="ic" value="N" id="IC_N" type="radio"onclick="calculateTotal()"><label for="IC_N" id="IC_N_Label" title="Tidak ada control">None (N)</label>
+      <input name="ic" value="L" id="IC_L" type="radio"onclick="calculateTotal()"><label for="IC_L" id="IC_L_Label" title="Ada metode sederhana atau pembatasan disengaja yang mungkin mencegah penyerang mengeksploitasi masalah">Limited (L)</label>
+      <input name="ic" value="M" id="IC_M" type="radio"onclick="calculateTotal()"><label for="IC_M" id="IC_M_Label" title="Mekanisme perlindungan biasanya digunakan tetapi telah diketahui keterbatasan yang mungkin dilewati dengan beberapa upaya oleh penyerang berpengalaman">Moderate (M)</label>
+      <input name="ic" value="I" id="IC_I" type="radio"onclick="calculateTotal()"><label for="IC_I" id="IC_I_Label" title="Kontrol tidak secara khusus melindungi terhadap eksploitasi kelemahan, tetapi secara tidak langsung mengurangi dampak ketika serangan berhasil diluncurkan, atau sebaliknya membuatnya lebih sulit untuk membangun eksploitasi fungsional. ">Indirect (Defense in Dept) (I)</label>
+      <input name="ic" value="B" id="IC_B" type="radio"onclick="calculateTotal()"><label for="IC_B" id="IC_B_Label" title="Kontrol terbaik yang dimiliki, meskipun mungkin memiliki beberapa keterbatasan yang dapat diatasi oleh penyerang terampil">Best Available (B)</label>
+      <input name="ic" value="C" id="IC_C" type="radio"onclick="calculateTotal()"><label for="IC_C" id="IC_C_Label" title="Kontrol yang sepenuhnya efektif terhadap kelemahan, yaitu, tidak ada bug atau kerentanan, dan tidak ada konsekuensi yang merugikan dari eksploitasi masalah.">Complete (C)</label>
+      <input name="ic" value="D" id="IC_D" type="radio"onclick="calculateTotal()"><label for="IC_D" id="IC_D_Label" title="Median of the weights for Complete, Best-Available, Indirect, Moderate, Limited, and None.">Default (D)</label>
+      <input name="ic" value="UK" id="IC_UK" type="radio"onclick="calculateTotal()"><label for="IC_UK" id="IC_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="ic" value="NA" id="IC_NA" type="radio"onclick="calculateTotal()"><label for="IC_NA" id="IC_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.">Not Applicable (NA)</label>
+      <input name="ic" value="Q" id="IC_Q" type="radio"onclick="calculateTotal()"><label for="IC_Q" id="IC_Q_Label" title="This factor could be quantified with custom weights.">Quantified (Q)</label>
+    </div>
+
+    <div class="metric">
+      <h3 id="RC_Heading" title="Keyakinan bahwa masalah yang dilaporkan adalah kelemahan yang dapat dimanfaatkan oleh penyerang">Finding Confidence(FC)</h3>
+      <input name="fc" value="T" id="FC_T" type="radio"onclick="calculateTotal()"><label for="FC_T" id="FC_T_Label" title="Kelemahan dapat dicapai oleh penyerang">Proven True (T)</label>
+      <input name="fc" value="LT" id="FC_LT" type="radio"onclick="calculateTotal()"><label for="FC_LT" id="FC_LT_Label" title=" Kelemahan terjadi dalam fungsi individu atau komponen desain yang bergantung pada fungsi itu, tetapi penyerang memliki keterbatasan menjangkau fungsi yang tidak diketahui atau tidak hadir">Proven Locally True (LT)</label>
+      <input name="fc" value="F" id="FC_F" type="radio"onclick="calculateTotal()"><label for="FC_F" id="FC_F_Label" title="Temuan ini keliru (yaitu temuan positif palsu dan tidak ada kelemahan), dan/atau tidak ada peran penyerang mungkin.">Proven False (F)</label>
+      <input name="fc" value="D" id="FC_D" type="radio"onclick="calculateTotal()"><label for="FC_D" id="FC_D_Label" title="Median of the weights for Proven True, Proven Locally True, and Proven False.">Default (D)</label>
+      <input name="fc" value="UK" id="FC_UK" type="radio"onclick="calculateTotal()"><label for="FC_UK" id="FC_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="fc" value="NA" id="FC_NA" type="radio"onclick="calculateTotal()"><label for="FC_NA" id="FC_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.
+This factor might not be applicable in an environment with high assurance requirements; the user might want to investigate every weakness finding of interest, regardless of confidence.">Not Applicable (NA)</label>
+      <input name="fc" value="Q" id="FC_Q" type="radio"onclick="calculateTotal()"><label for="FC_Q" id="FC_QS_Label" title="This factor could be quantified with custom weights. Some code analysis tools have precise measurements of the accuracy of specific detection patterns.">Quantified (Q)</label>
+    
+
+    </div>
+    <br></div>
+  </body>
+
+
+     <div id="totalPrice"></div>
+              <br>
+
+
+
+
+
+      <body onload='hideTotal2()'>
+    <div  id="wrap">
+  <legend id="baseMetricGroup_Legend" title="Hambatan yang harus diatasi penyerang untuk mengeksploitasi kelemahan">Attack Surface Score</legend>
+<br>
+ <div  class="metric">
+      <h3 id="RP_Heading" title="Jenis hak istimewa yang harus dimiliki penyerang untuk mencapai kode/ fungsi yang mengandung kelemahan">Required Privilege(RP)</h3>
+      <input name="rp" value="N" id="RP_N" type="radio"onclick="calculateTotal2()"><label for="RP_N" id="RP_N_Label" title="Tidak ada hak istimewa yang diperlukan">None (N)</label>
+      <input name="rp" value="L" id="RP_L" type="radio"onclick="calculateTotal2()"><label for="RP_L" id="RP_L_Label" title="The entity has limited or guest privileges that can significantly restrict allowed activities; the entity might be able to register or create a new account without any special requirements or proof of identity. For example, a web blog might allow participants to create a user name and submit a valid email address before entering comments. Note: this value does not refer to the guest operating system concept in virtualized hosts.">Limited/Guest (L)</label>
+      <input name="rp" value="RU" id="RP_RU" type="radio"onclick="calculateTotal2()"><label for="RP_RU" id="RP_RU_Label" title="Entitas adalah pengguna biasa yang tidak memiliki hak istimewa">Regular User (RU)</label>
+      <input name="rp" value="P" id="RP_P" type="radio"onclick="calculateTotal2()"><label for="RP_P" id="RP_P_Label" title="Entitas adalah pengguna yang valid dengan beberapa hak istimewa">Partially Privileged User (P)</label>
+      <input name="rp" value="A" id="RP_A" type="radio"onclick="calculateTotal2()"><label for="RP_A" id="RP_A_Label" title="Entitas memiliki administrator, root, sistem, atau hak istimewa setara yang menyiratkan kontrol penuh atas perangkat lunak ">Administrator (A)</label>
+      <input name="rp" value="D" id="RP_D" type="radio"onclick="calculateTotal2()"><label for="RP_D" id="Rp_D_Label" title="Median of the weights for None, Limited, Regular User, Partially-Privileged User, and Administrator.">Default (D)</label>
+      <input name="rp" value="UK" id="RP_UK" type="radio"onclick="calculateTotal2()"><label for="RP_UK" id="RP_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="rp" value="NA" id="RP_NA" type="radio"onclick="calculateTotal2()"><label for="RP_NA" id="RP_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.
+This factor might not be applicable in an environment with high assurance requirements that wants strict enforcement of privilege separation, even between already-privileged users.">Not Applicable(NA)</label>
+      <input name="rp" value="Q" id="RP_Q" type="radio"onclick="calculateTotal2()"><label for="RP_Q" id="RP_Q_Label" title="This factor could be quantified with custom weights. Note that Quantified values are supported for completeness; however, since privileges and users are discrete entities, there might be limited circumstances in which a quantified model would be useful.">Quantified (Q)</label>
+    </div>
+
+
+    <div class="metric">
+      <h3 id="RL_Heading" title="Lapisan operasional dimana penyerang harus memiliki hak untuk mencoba menyerang kelemahan">Required Privilege Layer(RL)</h3>
+       <input name="rl" value="A" id="RL_A" type="radio"onclick="calculateTotal2()"><label for="RL_A" id="RL_A_Label" title="Penyerang harus memiliki hak yang didukung dalam perangkat lunak di bawah analisis itu sendiri. ">Application (A)</label>
+      <input name="rl" value="S" id="RL_S" type="radio"onclick="calculateTotal2()"><label for="RL_S" id="RL_S_Label" title="Penyerang harus memiliki hak untuk sistem dasar atau host fisik yang digunakan untuk menjalankan perangkat lunak di bawah analisis">System (S)</label>
+      <input name="rl" value="N" id="RL_N" type="radio"onclick="calculateTotal2()"><label for="RL_N" id="RL_N_Label" title="Penyerang harus memiliki hak istimewa untuk mengakses jaringan.">Network (N)</label>
+      <input name="rl" value="E" id="RL_E" type="radio"onclick="calculateTotal2()"><label for="RL_E" id="RL_E_Label" title="Penyerang harus memiliki hak istimewa pada bagian penting dari infrastruktur perusahaan, seperti router, switch, DNS, pengontrol domain, firewall, server identitas, dll">Enterprise Infrastructure (E)</label>
+      <input name="rl" value="D" id="RL_D" type="radio"onclick="calculateTotal2()"><label for="RL_D" id="RL_D_Label" title="Median of the weights for Application, System, Network, and Enterprise Infrastructure.">Default (D)</label>
+      <input name="rl" value="UK" id="RL_UK" type="radio"onclick="calculateTotal2()"><label for="RL_UK" id="RL_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="rl" value="NA" id="RL_NA" type="radio"onclick="calculateTotal2()"><label for="RL_NA" id="RL_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.
+This factor might not be applicable in an environment with high assurance requirements that wants strict enforcement of privilege separation, even between already-privileged users.">Not Applicable (NA)</label>
+      <input name="rl" value="Q" id="RL_Q" type="radio"onclick="calculateTotal2()"><label for="RL_Q" id="RL_Q_Label" title="This factor could be quantified with custom weights. Note that Quantified values are supported for completeness; however, since privilege layers are discrete entities, there might be limited circumstances in which a quantified model would be useful">Quantified (Q)</label>
+    </div>
+
+<div class="metric">
+      <h3 id="AV_Heading" title="Saluran dimana penyerang harus berkomunikasi untuk mencapai kode atau fungsionalitas yang mengandung kelemahan">Acces Vector(AV)</h3>
+      <input name="av" value="I" id="AV_I" type="radio"onclick="calculateTotal2()"><label for="AV_I" id="AV_I_Label" title="Penyerang harus memiliki akses ke internet untuk mencapai kelemahan">Internet (I)</label>
+      <input name="av" value="R" id="AV_R" type="radio"onclick="calculateTotal2()"><label for="AV_R" id="AV_R_Label" title="Penyerang harus memiliki akses ke intranet perusahaan yang terlindung dari akses langsung dari internet, misalnya dengan menggunakan firewall, tetapi jika intranet dapat diakses oleh sebagian besar anggota perusahaan.">Intranet (R)</label>
+      <input name="av" value="V" id="AV_V" type="radio"onclick="calculateTotal2()"><label for="AV_V" id="AV_V_Label" title="Penyerang harus memiliki akses ke jaringan pribadi yang hanya dapat diakses oleh pihak terpercaya">Private Network (V)</label>
+      <input name="av" value="A" id="AV_A" type="radio"onclick="calculateTotal2()"><label for="AV_A" id="AV_A_Label" title="Penyerang harus memiliki akses ke antarmuka fisik ke jaringan">Adjacent Network (A)</label>
+      <input name="av" value="L" id="AV_L" type="radio"onclick="calculateTotal2()"><label for="AV_L" id="AV_L_Label" title="Penyerang harus memiliki akun interaktif,  antarmuka lokal secara langsung dengan sistem operasi yang mendasari.">Local (L)</label>
+      <input name="av" value="P" id="AV_P" type="radio"onclick="calculateTotal2()"><label for="AV_P" id="AV_P_Label" title="Penyerang harus memiliki akses fisik ke sistem yang menjalankan perangkat lunak, atau dapat berinteraksi dengan sistem melalui antarmuka seperti USB, CD, keyboard, mouse, dll.">Physical (P)</label>
+      <input name="av" value="D" id="AV_D" type="radio"onclick="calculateTotal2()"><label for="AV_D" id="AV_D_Label" title="Median of weights for relevant values.">Default (D)</label>
+      <input name="av" value="UK" id="AV_UK" type="radio"onclick="calculateTotal2()"><label for="AV_UK" id="AV_UK_Label" title="">Unknown (UK)</label>
+      <input name="av" value="NA" id="AV_NA" type="radio"onclick="calculateTotal2()"><label for="AV_NA" id="AV_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.">Not Applicable (NA)</label>
+      <input name="av" value="Q" id="AV_Q" type="radio"onclick="calculateTotal2()"><label for="AV_Q" id="AV_Q_Label" title="This factor could be quantified with custom weights. Note that Quantified values are supported for completeness; however, since access vectors are discrete entities, there might be limited circumstances in which a quantified model would be useful.">Quantiified (Q)</label>
+    </div>
+
+    <div class="metric">
+      <h3 id="AS_Heading" title="Kemampuan autentikasi yang melindungi kode / fungsionalitas yang mengandung kelemahan">Authentication Strength(AS)</h3>
+      <input name="as" value="S" id="AS_S" type="radio"onclick="calculateTotal2()"><label for="AS_S" id="AS_S_Label" title="The weakness requires strongest-available methods to tie the entity to a real-world identity, such as hardware-based tokens, and/or multi-factor authentication.">Strong (S)</label>
+      <input name="as" value="M" id="AS_M" type="radio"onclick="calculateTotal2()"><label for="AS_M" id="AS_M_Label" title="The weakness requires authentication using moderately strong methods, such as the use of certificates from untrusted authorities, knowledge-based authentication, or one-time passwords.">Moderate (M)</label>
+      <input name="as" value="W" id="AS_W" type="radio"onclick="calculateTotal2()"><label for="AS_W" id="AS_W_Label" title="The weakness requires a simple, weak authentication method that is easily compromised using spoofing, dictionary, or replay attacks, such as a static password.">Weak (W)</label>
+      <input name="as" value="N" id="AS_N" type="radio"onclick="calculateTotal2()"><label for="AS_N" id="AS_N_Label" title="The weakness does not require any authentication at all.">None (N)</label>
+      <input name="as" value="D" id="AS_D" type="radio"onclick="calculateTotal2()"><label for="AS_D" id="AS_D_Label" title="Median of values for Strong, Moderate, Weak, and None.">Default (D)</label>
+      <input name="as" value="UK" id="AS_UK" type="radio"onclick="calculateTotal2()"><label for="AS_UK" id="AS_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="as" value="NA" id="AS_NA" type="radio"onclick="calculateTotal2()"><label for="AS_NA" id="AS_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.
+This might not be applicable in an environment with high assurance requirements that seek to eliminate all weaknesses.">Not Applicable (NA)</label>
+      <input name="as" value="Q" id="AS_Q" type="radio"onclick="calculateTotal2()"><label for="AS_Q" id="AS_Q_Label" title="This factor could be quantified with custom weights.">Quantified (Q)</label>            
+    </div>
+
+    <div class="metric">
+      <h3 id="IN_Heading" title="Tindakan yang diperlukan oleh korban (manusia)  untuk kemungkinan serangan yang berhasil terjadi">Level Interaction(IN)</h3>
+      <input name="ini" value="A" id="IN_A" type="radio"onclick="calculateTotal2()"><label for="IN_A" id="IN_A_Label" title="Tidak ada interaksi manusia yang diperlukan.">Automated (A)</label>
+      <input name="ini" value="T" id="IN_T" type="radio"onclick="calculateTotal2()"><label for="IN_T" id="IN_T_Label" title="The attacker must convince the user to perform an action that is common or regarded as normal within typical product operation. For example, clicking on a link in a web page, or previewing the body of an email, is common behavior.">Typical/Limited (T)</label>
+      <input name="ini" value="M" id="IN_M" type="radio"onclick="calculateTotal2()"><label for="IN_M" id="IN_M_Label" title="The attacker must convince the user to perform an action that might appear suspicious to a cautious, knowledgeable user. For example: the user has to accept a warning that suggests the attacker's payload might contain dangerous content.">Moderate (M)</label>
+      <input name="ini" value="O" id="IN_O" type="radio"onclick="calculateTotal2()"><label for="IN_O" id="IN_O_Label" title="The attacker cannot directly control or influence the victim, and can only passively capitalize on mistakes or actions of others.">Opportunistic (O)</label>
+      <input name="ini" value="H" id="IN_H" type="radio"onclick="calculateTotal2()"><label for="IN_H" id="IN_H_Label" title="A large amount of social engineering is required, possibly including ignorance or negligence on the part of the victim.">High (H)</label>
+      <input name="ini" value="NI" id="IN_NI" type="radio"onclick="calculateTotal2()"><label for="IN_NI" id="IN_NI_Label" title="There is no interaction possible, not even opportunistically; this typically would render the weakness as a bug instead of leading to a vulnerability. Since CWSS is for security, the weight is 0.">No Interaction (NI)</label>
+      <input name="ini" value="D" id="IN_D" type="radio"onclick="calculateTotal2()"><label for="IN_D" id="IN_D_Label" title="Median of values for Automated, Limited, Moderate, Opportunistic, High, and No interaction">Default (D)</label>
+      <input name="ini" value="UK" id="IN_UK" type="radio"onclick="calculateTotal2()"><label for="IN_UK" id="IN_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="ini" value="NA" id="IN_NA" type="radio"onclick="calculateTotal2()"><label for="IN_NA" id="IN_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.
+This might not be applicable in an environment with high assurance requirements, or an environment that has high concerns about insider attacks between people with an established trust relationship.">Not Applicable (NA)</label>
+      <input name="ini" value="Q" id="IN_Q" type="radio"onclick="calculateTotal2()"><label for="IN_Q" id="IN_Q_Label" title="This factor could be quantified with custom weights.">Quantified (Q)</label>
+    </div>
+
+     <div class="metric">
+      <h3 id="SC_Heading" title="Whether the weakness is present in all deployable instances of the software, or if it is limited to a subset of platforms and/or configurations.">Deployment Scope(SC)</h3>
+      <input name="sco" value="A" id="SC_A" type="radio"onclick="calculateTotal2()"><label for="SC_A" id="SC_A_Label" title="Present in all platforms or configurations">All (A)</label>
+      <input name="sco" value="M" id="SC_M" type="radio"onclick="calculateTotal2()"><label for="SC_M" id="SC_M_Label" title="Present in common platforms or configurations">Moderate (M)</label>
+      <input name="sco" value="R" id="SC_R" type="radio"onclick="calculateTotal2()"><label for="SC_R" id="SC_R_Label" title="Only present in rare platforms or configurations">Rare (R)</label>
+      <input name="sco" value="P" id="SC_P" type="radio"onclick="calculateTotal2()"><label for="SC_P" id="SC_P_Label" title="Potentially reachable**, but all code paths are currently safe, and/or the weakness is in dead code">Potentially Reachable (P)</label>
+      <input name="sco" value="D" id="SC_D" type="radio"onclick="calculateTotal2()"><label for="SC_D" id="SC_D_Label" title="The median of weights for RAMP values">Default (D)</label>
+      <input name="sco" value="UK" id="SC_UK" type="radio"onclick="calculateTotal2()"><label for="SC_UK" id="SC_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="sco" value="NA" id="SC_NA" type="radio"onclick="calculateTotal2()"><label for="SC_NA" id="SC_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.">Not Applicable (NA)</label>
+      <input name="sco" value="Q" id="SC_Q" type="radio"onclick="calculateTotal2()"><label for="SC_Q" id="SC_Q_Label" title="This factor could be quantified with custom weights. The user may know what percentage of shipped (or supported) software contains this bug.">Quantified (Q)</label>
+
+    </div>
+</body>
+    <br></br>
+     <div id="totalprices"></div>
+     <br>
+
+
+ 
+
+
+<fieldset id="baseMetricGroup">
+  <legend id="baseMetricGroup_Legend" title="Suatu karakteristik kelemahan yang spesifik dalam konteks operasional tertentu.">Environmental Score</legend>
+
+ <div class="metric">
+      <h3 id="BI_Heading" title="Menggambarkan dampak potensial terhadap bisnis atau misi jika kelemahan dapat berhasil dieksploitasi">Business Impact(BI)</h3>
+      <input name="bim" value="C" id="BI_C" type="radio"onclick="calculateTotal3()"><label for="BI_C" id="BI_C_Label" title="Bisnis/misi bisa gagal.">Critical (C)</label>
+      <input name="bim" value="H" id="BI_H" type="radio"onclick="calculateTotal3()"><label for="BI_H" id="BI_H_Label" title="Operasi bisnis/misi akan terpengaruh secara signifikan.">High (H)</label>
+      <input name="bim" value="M" id="BI_M" type="radio"onclick="calculateTotal3()"><label for="BI_M" id="BI_M_Label" title="Bisnis/misi akan terpengaruh, tetapi tanpa kerusakan yang luas untuk operasi rutin.">Medium (M)</label>
+      <input name="bim" value="L" id="BI_L" type="radio"onclick="calculateTotal3()"><label for="BI_L" id="BI_L_Label" title="Dampak minimal pada bisnis/misi.">Low (L)</label>
+      <input name="bim" value="N" id="BI_N" type="radio"onclick="calculateTotal3()"><label for="BI_N" id="BI_N_Label" title="Tidak ada dampak.">None (N)</label>
+      <input name="bim" value="D" id="BI_D" type="radio"onclick="calculateTotal3()"><label for="BI_D" id="BI_D_Label" title="The median of weights for Critical, High, Medium, Low, and None.">Default (D)</label>
+      <input name="bim" value="UK" id="BI_UK" type="radio"onclick="calculateTotal3()"><label for="BI_UK" id="BI_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="bim" value="NA" id="BI_NA" type="radio"onclick="calculateTotal3()"><label for="BI_NA" id="BI_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.
+This factor might not be applicable in contexts in which the business impact is irrelevant, or if the impact is being assessed and considered in analytical processes that are outside of the CWSS score itself.">Not Applicable (NA)</label>
+      <input name="bim" value="Q" id="BI_Q" type="radio"onclick="calculateTotal3()"><label for="BI_Q" id="BI_Q_Label" title="This factor could be quantified with custom weights. Some organizations might have specific measurements for the business value of the asset, for example, which could be integrated into this measurement.">Quantified (Q)</label>
+    </div>
+
+
+    <div class="metric">
+      <h3 id="DI_Heading" title="Kemungkinan bahwa seorang penyerang dapat menemukan kelemahan">Likelihood Of Discovery(DI)</h3>
+      <input name="di" value="H" id="DI_H" type="radio"onclick="calculateTotal3()"><label for="DI_H" id="DI_H_Label" title="Sangat mungkin bahwa seorang penyerang dapat menemukan kelemahan dengan cepat dan dengan sedikit usaha menggunakan teknik sederhana, tanpa akses ke kode sumber atau artefak lain yang menyederhanakan deteksi kelemahan">High (H)</label>
+      <input name="di" value="M" id="DI_M" type="radio"onclick="calculateTotal3()"><label for="DI_M" id="DI_M_Label" title="Seorang penyerang mungkin dapat menemukan kelemahan, tetapi akan memerlukan keterampilan tertentu untuk melakukannya, mungkin memerlukan akses kode sumber atau pengetahuan reverse engineering">Medium (M)</label>
+      <input name="di" value="L" id="DI_L" type="radio"onclick="calculateTotal3()"><label for="DI_L" id="DI_L_Label" title="Seorang penyerang tidak mungkin untuk menemukan kelemahan tanpa keterampilan yang sangat khusus">Low (L)</label>
+      <input name="di" value="D" id="DI_D" type="radio"onclick="calculateTotal3()"><label for="DI_D" id="DI_D_Label" title="The median of the High, Medium, and Low values.">Default (D)</label>
+      <input name="di" value="UK" id="DI_UK" type="radio"onclick="calculateTotal3()"><label for="DI_UK" id="DI_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="di" value="NA" id="DI_NA" type="radio"onclick="calculateTotal3()"><label for="DI_NA" id="DI_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.
+This might not be applicable when the scorer assumes that all weaknesses will be discovered by an attacker.">Not Applicable (NA)</label>
+      <input name="di" value="Q" id="DI_Q" type="radio"onclick="calculateTotal3()"><label for="DI_Q" id="DI_Q_Label" title="This factor could be quantified with custom weights.">Quantified (Q)</label>
+    </div>
+
+<div class="metric">
+      <h3 id="EX_Heading" title="Kemungkinan bahwa, jika kelemahan ditemukan, seorang penyerang dengan hak istimewa/otentikasi/akses yang diperlukan akan dapat berhasil mengeksploitasi itu.">Likelihood Of Exploit(EX)</h3>
+      <input name="ex" value="H" id="EX_H" type="radio"onclick="calculateTotal3()"><label for="EX_H" id="EX_H_Label" title="Sangat mungkin bahwa seorang penyerang akan menargetkan keberhasilan mengeksploitasi dengan mudah.">High (H)</label>
+      <input name="ex" value="M" id="EX_M" type="radio"onclick="calculateTotal3()"><label for="EX_M" id="EX_M_Label" title="Seorang penyerang mungkin akan menargetkan kelemahan ini berhasil, tetapi kemungkinan keberhasilan dapat bervariasi, atau memerlukan beberapa upaya untuk berhasil.">Medium (M)</label>
+      <input name="ex" value="L" id="EX_L" type="radio"onclick="calculateTotal3()"><label for="EX_L" id="EX_L_Label" title="Seorang penyerang mungkin tidak akan menargetkan kelemahan ini, atau bisa memiliki kemungkinan sangat terbatas pada keberhasilan.">Low (L)</label>
+      <input name="ex" value="N" id="EX_N" type="radio"onclick="calculateTotal3()"><label for="EX_N" id="EX_N_Label" title="Seorang penyerang tidak memiliki kesempatan untuk sukses; yaitu, masalahnya adalah bug karena tidak ada peran penyerang, dan tidak ada manfaat bagi penyerang. ">None (N)</label>
+      <input name="ex" value="D" id="EX_D" type="radio"onclick="calculateTotal3()"><label for="EX_D" id="EX_D_Label" title="Median of the High, Medium, and Low values. The None value is ignored with the expectation that few weakness findings would be scored using the value, and including it in the median calculation would reduce the weight to a non-intuitive level.">Default (D)</label>
+      <input name="ex" value="UK" id="EX_UK" type="radio"onclick="calculateTotal3()"><label for="EX_UK" id="EX_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="ex" value="NA" id="EX_NA" type="radio"onclick="calculateTotal3()"><label for="EX_NA" id="EX_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.
+For example, the scorer might want to assume that attackers could exploit any weakness they can find, or be willing to invest significant resources to work around any possible barriers to exploit success.">Not Applicable (NA)</label>
+      <input name="ex" value="Q" id="EX_Q" type="radio"onclick="calculateTotal3()"><label for="EX_Q" id="EX_Q_Label" title="This factor could be quantified with custom weights.">Quantified (Q)</label>
+
+     </div>
+
+    <div class="metric">
+      <h3 id="EC_Heading" title="Kemampuan kontrol atau Mitigations di luar perangkat lunak yang dapat membuat kelemahan lebih sulit bagi seorang penyerang untuk mencapai dan/atau memicu">Eksternal Control Effectiveness(EC)</h3>
+      <input name="ec" value="N" id="EC_N" type="radio"onclick="calculateTotal3()"><label for="EC_N" id="EC_N_Label" title="Tidak ada kontrol">None (N)</label>
+      <input name="ec" value="L" id="EC_L" type="radio"onclick="calculateTotal3()"><label for="EC_L" id="EC_L_Label" title="Ada metode sederhana atau pembatasan yang mungkin mencegah penyerang mengeksploitasi masalah">Limited (L)</label>
+      <input name="ec" value="M" id="EC_M" type="radio"onclick="calculateTotal3()"><label for="EC_M" id="EC_M_Label" title="Mekanisme perlindungan biasanya digunakan tetapi telah diketahui batasannya yang mungkin dilewati dengan beberapa upaya oleh penyerang berpengetahuan.">Moderate (M)</label>
+      <input name="ec" value="I" id="EC_I" type="radio"onclick="calculateTotal3()"><label for="EC_I" id="EC_I_Label" title="Kontrol tidak secara khusus melindungi terhadap eksploitasi kelemahan, tetapi secara tidak langsung mengurangi dampak ketika serangan berhasil diluncurkan, atau sebaliknya membuatnya lebih sulit untuk membangun eksploitasi fungsional.">Indirect (Defense in Dept) (I)</label>
+      <input name="ec" value="B" id="EC_B" type="radio"onclick="calculateTotal3()"><label for="EC_B" id="EC_B_Label" title="Kontrol terbaik saat ini, meskipun mungkin memiliki beberapa keterbatasan yang dapat diatasi oleh penyerang terampil">Best Available (B)</label>
+      <input name="ec" value="C" id="EC_C" type="radio"onclick="calculateTotal3()"><label for="EC_C" id="EC_C_Label" title="Kontrol sepenuhnya efektif terhadap kelemahan, yaitu, tidak ada bug atau kerentanan, dan tidak ada konsekuensi yang merugikan dari eksploitasi masalah.">Complete (C)</label>
+      <input name="ec" value="D" id="EC_D" type="radio"onclick="calculateTotal3()"><label for="EC_D" id="EC_D_Label" title="  
+The median of Complete, Best-Available, Indirect, Moderate, Limited, and None.">Default (D)</label>
+      <input name="ec" value="UK" id="EC_UK" type="radio"onclick="calculateTotal3()"><label for="EC_UK" id="EC_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="ec" value="NA" id="EC_NA" type="radio"onclick="calculateTotal3()"><label for="EC_NA" id="EC_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses">Not Applicable (NA)</label>
+      <input name="ec" value="Q" id="EC_Q" type="radio"onclick="calculateTotal3()"><label for="EC_Q" id="EC_Q_Label" title="This factor could be quantified with custom weights.">Quantified (Q)</label>
+   </div>
+
+    <div class="metric">
+      <h3 id="P_Heading" title="Seberapa sering jenis kelemahan ini muncul dalam perangkat lunak">Prevalence(P)</h3>
+      <input name="p" value="W" id="P_W" type="radio"onclick="calculateTotal3()"><label for="P_W" id="P_W_Label" title="Kelemahan yang ditemukan di sebagian besar atau semua perangkat lunak dalam lingkungan terkait, dan mungkin terjadi beberapa kali dalam paket perangkat lunak yang sama.">Widespread (W)</label>
+      <input name="p" value="H" id="P_H" type="radio"onclick="calculateTotal3()"><label for="P_H" id="P_H_Label" title="Kelemahan yang dihadapi sangat sering, tetapi tidak luas">High (H)</label>
+      <input name="p" value="C" id="P_C" type="radio"onclick="calculateTotal3()"><label for="P_C" id="P_C_Label" title="Kelemahan yang dihadapi secara berkala">Common (C)</label>
+      <input name="p" value="L" id="P_L" type="radio"onclick="calculateTotal3()"><label for="P_L" id="P_L_Label" title="Kelemahan yang dihadapi jarang, atau tidak pernah.">Limited (L)</label>
+      <input name="p" value="D" id="P_D" type="radio"onclick="calculateTotal3()"><label for="P_D" id="P_D_Label" title="The median of Limited, Common, High, and Widespread.">Default (D)</label>
+      <input name="p" value="UK" id="P_UK" type="radio"onclick="calculateTotal3()"><label for="P_UK" id="P_UK_Label" title="There is not enough information to provide a value for this factor. Further analysis may be necessary. In the future, a different value might be chosen, which could affect the score.">Unknown (UK)</label>
+      <input name="p" value="NA" id="P_NA" type="radio"onclick="calculateTotal3()"><label for="P_NA" id="P_NA_Label" title="This factor is being intentionally ignored in the score calculation because it is not relevant to how the scorer prioritizes weaknesses.
+When performing targeted scoring against specific weakness findings in an application, Prevalence is normally expected to be irrelevant, since the individual application and the analytical techniques determine how frequently the weakness occurs, and many aggregated scoring methods will generate larger scores if there are more weaknesses.">Not Applicable (NA)</label>
+      <input name="p" value="Q" id="P_Q" type="radio"onclick="calculateTotal3()"><label for="P_Q" id="P_Q_Label" title="This factor could be quantified with custom weights. Precise prevalence data may be available within limited use cases, provided the user is tracking weakness data at a low level of granularity. For example, a developer may be tracking weaknesses across a suite of products, or a code-auditing vendor could measure prevalence from the software analyzed across the entire customer base. In a previous version of CWSS, prevalence was calculated based on from raw voting data that was collected for the 2010 Top 25, which used discrete values (range 1 to 4) which were then adjusted to a 1-to-10 range."> Quantified (Q)</label>
+    </div>
+    <br></br>
+
+    <div id="totalPriced" ></div>
+
+    
+
+
+<br>
+<fieldset id="baseMetricGroup">
+  <legend id="baseMetricGroup_Legend" title="The Base Metric group represents the intrinsic  characteristics of a vulnerability that are constant over time and across user environments. Determine the vulnerable component and score Attack Vector, Attack Complexity, Privileges Required and User Interaction relative to this.">CWSS Final Score</legend>
+
+<div id="totalPricede" onclick ="calculateTotal4()">Click to see CWSS score</div>
+
+
+
+</script>
+
+
+ <!--<br><a method="post" action="proses.php" href="cetak.php" target="_blank">Download PDF report </a>-->
+
+<a href="javascript:genPDF()"> download pdf</a>
+
+</script>
+    
+</div>  
+
+</body>
+</html>

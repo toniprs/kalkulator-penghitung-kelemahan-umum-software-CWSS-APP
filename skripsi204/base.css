@@ -1,0 +1,318 @@
+<style
+  body{
+  background-color:blue;
+	font-size:16px;
+	color:red;
+	font-family: sans-serif;
+  border:12px solid red;
+}
+ 
+.content{
+	width: 94%;
+	margin: 0px auto;
+  background-color: navy;
+  color: black;
+  font-family: cursive;
+  font-size: 17px;
+  background-color:white;
+  border-radius: 20px;
+
+}
+ 
+/*header*/
+header{
+	background-color: navy;
+	padding: 40px 10px;
+	border-radius: 20px;
+	border: 1px solid #f0f0f0;
+	margin-top:1px;
+  position: sticky;
+}
+ 
+header h1.judul,
+header h3.deskripsi{
+	text-align: center;
+	color: yellow;
+  font-weight: bolder;	
+}
+ 
+/*menu navigasi*/
+/*.menu{
+	background-color:yellow;
+	border: 1px solid #f0f0f0;
+	border-radius: 8px;	
+	margin-bottom: 10px;
+  	
+}
+ 
+nav ul li:hover .sub1 {display:block}
+nav ul .sub1 {
+    display:none;
+    position:absolute;
+    left:150px;
+    top:50px;
+    background-color:#d35400;
+}
+.sub1 a:hover { color:#fff }
+
+div.menu ul {
+	list-style:none;
+	overflow: hidden;
+	
+
+}
+ 
+ 
+div.menu ul li {
+	float:left;		
+	text-transform:uppercase;
+
+
+  
+}
+ 
+div.menu ul li a {
+	display:block;	
+	padding:0 20px;
+	text-decoration:none;
+	text-align: center;
+	color:red;
+  font-weight: bolder;
+	font-family: sans-serif;
+	font-size:13px;
+	font-weight:400;
+	transition:all 0.3s ease-in-out;
+
+  
+}
+ 
+div.menu ul li a:hover,
+div.menu ul li a.hoverover {	
+	cursor: pointer;	
+	color:#fff;
+  text-align: center;
+
+}*/
+
+
+
+
+nav {
+    height:50px;
+    background-color:crimson;
+    line-height:50px;
+    position:relative;
+    top:-13px;
+    width:100%;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    margin:auto;
+
+}
+
+nav ul {
+    list-style:none;
+}
+nav ul li a {
+    float:left;
+    width:150px;
+    color:#fff;
+    text-decoration:none;
+    display:block;
+    text-align:center;
+}
+nav ul li a:hover {
+    background-color:orange;
+    display:block;
+}
+/*css untuk menu hover dropdown*/
+nav ul li:hover .sub1 {display:block}
+nav ul .sub1 {
+    display:none;
+    position:absolute;
+    left:150px;
+    top:50px;
+    background-color:crimson;
+}
+.sub1 a:hover { color:#fff }
+
+#footer{
+position:relative;
+background:navy;
+height:120px;
+float: center;
+background-size: 50px
+border-radius: 5px;
+  border: 1px solid #f0f0f0;
+}
+#footer a.title
+{
+color:#ffffff; 
+text-decoration:blink;
+font-size:15px;
+line-height:50px; 
+
+float:center;
+padding:0px 10px;
+}
+
+ 
+div.badan{
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid #f0f0f0;
+	margin-bottom: 10px;
+  margin-left: 2px
+}
+ 
+div.halaman{
+	text-align: center;
+	padding: 30px 20px;	
+  
+}
+
+div#totalPrice
+{ 
+
+    padding:25px;
+    background-position: center;
+    border-radius: 10px;
+  border: 1px solid #f0f0f0;
+    margin-top: 10px;
+    margin-left: 70%;
+   
+    font-weight:bolder;
+
+    background-color:navy;
+  color:gold;
+  font-size:20px;
+  
+  font-family: serif;
+  font-color:white;
+  text-align:center;
+  
+
+
+}
+
+
+
+div#totalprices
+{ 
+
+    padding:25px;
+  
+    border-radius: 10px;
+  border: 0px solid #f0f0f0;
+    margin-top: 10px;
+    margin-left: 70%;
+    
+    
+     font-family: serif;
+    font-weight:bolder;
+    background-color:navy;
+    color:gold;
+  font-size:20px;
+  text-align:center;
+  
+
+}
+
+div#totalPriced
+{ 
+
+    padding:25px;
+    size: 20%;
+    border-radius: 10px;
+  border: 1px solid #f0f0f0;
+    margin-top: 1px;
+    margin-left: 70%;
+   
+    font-weight:bolder;
+    background-color:#34ebd2;
+   
+      font-family: serif;
+    font-weight:bolder;
+    background-color:navy;
+    position: center;
+    color:gold;
+  font-size:20px;
+  text-align:center; 
+ 
+  
+}
+
+
+div#totalPricede
+{ 
+
+    padding:20px;
+    border-radius: 20px;
+  border: 1px solid #f0f0f0;
+    margin-top: 10px;
+    margin: 20px;
+    font-weight:bolder;
+    background-color:navy;
+     font-family:serif;
+     color:white;
+     text-align: center;
+     font-size:25px;
+     border-width: 1px;
+     border-color: gold;
+}
+
+
+
+#cvssReference { font-size: 100%; }
+  fieldset { position: sticky; background-color:#44e3db; margin-top: 0px; border:120px; padding: 1em 0; width:100%;}
+  fieldset legend { background-color:yellow; color: black; margin: 0; width: 100%; padding: 0.5em 0px; text-indent: 1em; font-size: 15px; font-weight: bolder;}
+  fieldset div.metric { padding: 0; margin: 0.5em 0; }
+
+@media only screen and (min-width:768px) {
+  fieldset div.column { width: 45%; margin: 0 0 0 1em; }
+  fieldset div.column-left { float: left; height: auto; }
+  fieldset div.column-right { float: right; height: auto; }
+}
+  fieldset h3 { font-size: 1em; margin: 5px; padding-left: 0.1em; margin-left: 8px; }
+  fieldset input { display:none; width:auto;}
+  fieldset label {
+    background: #ffffff; display: inline-block; margin: 3px; margin-left:8px; padding: 4px 6px; border:1px; cursor: pointer; font-size: 16px; font-weight: bolder;
+    border-radius: 10px; color: #666666; border: 1px solid #999999;
+      }
+  fieldset label:hover { background: #666666; color: #ffffff; border: 1px solid #666666; }
+  fieldset input:checked + label { background:navy; border: 1px solid green; color: #ffffff;  margin-left:8px;}
+
+
+.table1 {
+    font-family: sans-serif;
+    color: #444;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #f2f5f7;
+}
+
+.table1 tr th{
+    background: #35A9DB;
+    color: #fff;
+    font-weight: normal;
+}
+
+.table1, th, td {
+    padding: 8px 20px;
+    text-align: center;
+}
+
+.table1 tr:hover {
+    background-color: #f5f5f5;
+}
+
+.table1 tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
+
+
+
+
+</style>
